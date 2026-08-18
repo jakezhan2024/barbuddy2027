@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Exam Prep 2027</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-hover: #1e40af;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --accent: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: transparent;
+            color: #dbeafe;
+            border: 1px solid transparent;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: var(--primary-hover);
+            color: white;
+            border-color: #93c5fd;
+        }
+
+        /* Main Content Container */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Grid for Home Page Cards */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Question / Quiz Layout */
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .options-group {
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            text-align: left;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .option-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .action-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .modal p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 onclick="showView('home')">Bar Exam Prep 2027</h1>
+        <nav>
+            <button onclick="showView('home')">Home</button>
+            <button onclick="showView('jurisprudence')">Jurisprudence</button>
+            <button onclick="showView('quiz')">Quiz</button>
+            <button onclick="showView('exam')">Simulated Exam</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home View -->
+        <section id="home-view" class="view active">
+            <h2>2027 Bar Exam Subjects</h2>
+            <p style="color: var(--text-muted);">Select a subject to start reviewing key doctrines, laws, and notes.</p>
+            
+            <div class="subjects-grid">
+                <div class="card" onclick="showSubject('Constitutional Law', 'Study principles of government structure, Bill of Rights, judicial review, and constitutional doctrines.')">
+                    <h3>Constitutional Law</h3>
+                    <p>Political Law, Bill of Rights, and Administrative Law.</p>
+                </div>
+                <div class="card" onclick="showSubject('Labor Law and Social Legislation', 'Review labor standards, labor relations, social security laws, and employee welfare policies.')">
+                    <h3>Labor Law & Social Legislation</h3>
+                    <p>Labor Standards, Labor Relations, and Social Security.</p>
+                </div>
+                <div class="card" onclick="showSubject('Civil Law', 'Covers Persons and Family Relations, Property, Obligations & Contracts, Succession, and Torts.')">
+                    <h3>Civil Law</h3>
+                    <p>Persons, Property, Contracts, Succession, and Torts.</p>
+                </div>
+                <div class="card" onclick="showSubject('Commercial and Taxation Laws', 'Study corporations, banking laws, insurance, NIRC, and local taxation principles.')">
+                    <h3>Commercial & Taxation Laws</h3>
+                    <p>Corporations, Intellectual Property, and Tax Laws.</p>
+                </div>
+                <div class="card" onclick="showSubject('Criminal Law', 'Focus on Revised Penal Code Book I & II, special penal laws, and criminal liability rules.')">
+                    <h3>Criminal Law</h3>
+                    <p>RPC Books 1 & 2, Penalties, and Special Penal Laws.</p>
+                </div>
+                <div class="card" onclick="showSubject('Remedial Law & Ethics', 'Covers Civil/Criminal Procedure, Evidence, Special Proceedings, Legal and Judicial Ethics.')">
+                    <h3>Remedial Law & Ethics</h3>
+                    <p>Procedures, Evidence, Special Actions, and Legal Ethics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Subject View -->
+        <section id="subject-view" class="view">
+            <button class="action-btn" onclick="showView('home')" style="margin-bottom: 1rem;">&larr; Back to Home</button>
+            <h2 id="subject-title">Subject Title</h2>
+            <p id="subject-description" style="margin-top: 0.5rem; color: var(--text-muted);"></p>
+        </section>
+
+        <!-- Jurisprudence / Cases View -->
+        <section id="jurisprudence-view" class="view">
+            <h2>Jurisprudence & Case Digests</h2>
+            <p style="color: var(--text-muted);">Browse landmark Supreme Court decisions and recent jurisprudence relevant to the 2027 Bar Syllabus.</p>
+            <div class="question-card" style="margin-top: 1rem;">
+                <h3>Search / Filter Cases</h3>
+                <p style="margin-top: 0.5rem;">Case library directory can be integrated here.</p>
+            </div>
+        </section>
+
+        <!-- Quiz View -->
+        <section id="quiz-view" class="view">
+            <h2>Practice Recall Quiz</h2>
+            <p style="color: var(--text-muted);">Quick-fire questions to reinforce key legal concepts.</p>
+
+            <div class="question-card">
+                <p><strong>Question 1:</strong> Which constitutional right guarantees that no person shall be deprived of life, liberty, or property without due process of law?</p>
+                <div class="options-group">
+                    <button class="option-btn" onclick="openModal('Correct!', 'Article III, Section 1 of the 1987 Philippine Constitution states that no person shall be deprived of life, liberty, or property without due process of law, nor shall any person be denied the equal protection of the laws.')">A. Due Process Clause</button>
+                    <button class="option-btn" onclick="openModal('Incorrect', 'The correct answer is Due Process Clause under Article III, Section 1.')">B. Equal Protection Clause</button>
+                    <button class="option-btn" onclick="openModal('Incorrect', 'The correct answer is Due Process Clause under Article III, Section 1.')">C. Non-Impairment Clause</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Simulation View -->
+        <section id="exam-view" class="view">
+            <h2>Bar Exam Simulation</h2>
+            <p style="color: var(--text-muted);">Simulated past bar exam questions with legal basis explanations.</p>
+
+            <div class="question-card">
+                <p><strong>Bar Exam Scenario:</strong> A law is passed imposing an immediate tax without providing the taxpayer an opportunity to be heard. Is the law valid?</p>
+                <div class="options-group">
+                    <button class="option-btn" onclick="openModal('Incorrect', 'Taxation is broad, but it remains subject to constitutional limitations such as due process.')">A. Yes, because taxation is an inherent power of the State.</button>
+                    <button class="option-btn" onclick="openModal('Correct Basis!', 'While taxation is an essential inherent power, its exercise is strictly subject to constitutional limitations, including the Due Process Clause.')">B. No, because the power of taxation is subject to constitutional limitations.</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Info Modal for Explanations -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal">
+            <h3 id="modal-title">Explanation</h3>
+            <p id="modal-text">Explanation details will appear here.</p>
+            <button class="action-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>2027 Bar Examination Study Portal &copy; Designed for Bar Reviewees</p>
+    </footer>
+
+    <script>
+        // Tab / View Navigation
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            const targetView = document.getElementById(`${viewId}-view`);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+
+            // Update Header Nav active state
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        // Dynamically load Subject Content
+        function showSubject(name, description) {
+            document.getElementById('subject-title').innerText = name;
+            document.getElementById('subject-description').innerText = description;
+            showView('subject');
+        }
+
+        // Modal Functions
+        function openModal(status, explanation) {
+            document.getElementById('modal-title').innerText = status;
+            document.getElementById('modal-text').innerText = explanation;
+            document.getElementById('info-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('info-modal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside content area
+        window.onclick = function(event) {
+            const modal = document.getElementById('info-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
