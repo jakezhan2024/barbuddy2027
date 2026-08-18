@@ -1,356 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bar Exam Prep 2027</title>
-    <style>
-        :root {
-            --primary: #1e3a8a;
-            --primary-hover: #1e40af;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #0f172a;
-            --text-muted: #475569;
-            --border: #e2e8f0;
-            --accent: #16a34a;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Law Review Portal - Constitutional Law Kit</title>
+  <style>
+    /* GLOBAL & THEME VARIABLES */
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #2563eb;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --error: #dc2626;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+    }
 
-        /* Navigation Header */
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+    /* NAVIGATION BAR */
+    nav {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-        header h1 {
-            font-size: 1.25rem;
-            cursor: pointer;
-        }
+    nav .logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
 
-        nav {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
 
-        nav button {
-            background: transparent;
-            color: #dbeafe;
-            border: 1px solid transparent;
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
 
-        nav button:hover, nav button.active {
-            background-color: var(--primary-hover);
-            color: white;
-            border-color: #93c5fd;
-        }
+    nav a:hover {
+      color: var(--accent);
+    }
 
-        /* Main Content Container */
-        main {
-            flex: 1;
-            padding: 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            width: 100%;
-        }
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
 
-        .view {
-            display: none;
-        }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-        .view.active {
-            display: block;
-        }
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        /* Grid for Home Page Cards */
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+    /* CARDS & SECTIONS */
+    .card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
 
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
-        }
+    h2 {
+      color: var(--primary);
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+    }
 
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
+    h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
 
-        /* Question / Quiz Layout */
-        .question-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
+    ul {
+      padding-left: 20px;
+    }
 
-        .options-group {
-            margin: 1rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+    li {
+      margin-bottom: 10px;
+    }
 
-        .option-btn {
-            text-align: left;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background: white;
-            cursor: pointer;
-        }
+    /* QUIZ COMPONENT STYLES */
+    .question-block {
+      background: #f1f5f9;
+      padding: 18px 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--secondary);
+    }
 
-        .option-btn:hover {
-            background-color: #f1f5f9;
-        }
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
 
-        .action-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-        /* Modal Styles */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            z-index: 1000;
-        }
+    .option-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 12px 15px;
+      border-radius: 4px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+    .option-btn:hover {
+      background: #e2e8f0;
+    }
 
-        .modal {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
+    .input-fill {
+      padding: 10px;
+      width: 100%;
+      max-width: 320px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-top: 5px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
 
-        .modal h3 {
-            margin-bottom: 0.75rem;
-        }
+    .submit-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
 
-        .modal p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
+    .submit-btn:hover {
+      background: var(--primary);
+    }
 
-        footer {
-            text-align: center;
-            padding: 1rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            font-size: 0.85rem;
-        }
-    </style>
+    .explanation {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 15px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .explanation.correct {
+      display: block;
+      background-color: #dcfce7;
+      color: #14532d;
+      border: 1px solid #86efac;
+    }
+
+    .explanation.incorrect {
+      display: block;
+      background-color: #fee2e2;
+      color: #7f1d1d;
+      border: 1px solid #fca5a5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1 onclick="showView('home')">Bar Exam Prep 2027</h1>
-        <nav>
-            <button onclick="showView('home')">Home</button>
-            <button onclick="showView('jurisprudence')">Jurisprudence</button>
-            <button onclick="showView('quiz')">Quiz</button>
-            <button onclick="showView('exam')">Simulated Exam</button>
-        </nav>
-    </header>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Legal Prep HQ</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#notes">Review Notes</a></li>
+      <li><a href="#quiz">Practice Quiz</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <!-- Home View -->
-        <section id="home-view" class="view active">
-            <h2>2027 Bar Exam Subjects</h2>
-            <p style="color: var(--text-muted);">Select a subject to start reviewing key doctrines, laws, and notes.</p>
-            
-            <div class="subjects-grid">
-                <div class="card" onclick="showSubject('Constitutional Law', 'Study principles of government structure, Bill of Rights, judicial review, and constitutional doctrines.')">
-                    <h3>Constitutional Law</h3>
-                    <p>Political Law, Bill of Rights, and Administrative Law.</p>
-                </div>
-                <div class="card" onclick="showSubject('Labor Law and Social Legislation', 'Review labor standards, labor relations, social security laws, and employee welfare policies.')">
-                    <h3>Labor Law & Social Legislation</h3>
-                    <p>Labor Standards, Labor Relations, and Social Security.</p>
-                </div>
-                <div class="card" onclick="showSubject('Civil Law', 'Covers Persons and Family Relations, Property, Obligations & Contracts, Succession, and Torts.')">
-                    <h3>Civil Law</h3>
-                    <p>Persons, Property, Contracts, Succession, and Torts.</p>
-                </div>
-                <div class="card" onclick="showSubject('Commercial and Taxation Laws', 'Study corporations, banking laws, insurance, NIRC, and local taxation principles.')">
-                    <h3>Commercial & Taxation Laws</h3>
-                    <p>Corporations, Intellectual Property, and Tax Laws.</p>
-                </div>
-                <div class="card" onclick="showSubject('Criminal Law', 'Focus on Revised Penal Code Book I & II, special penal laws, and criminal liability rules.')">
-                    <h3>Criminal Law</h3>
-                    <p>RPC Books 1 & 2, Penalties, and Special Penal Laws.</p>
-                </div>
-                <div class="card" onclick="showSubject('Remedial Law & Ethics', 'Covers Civil/Criminal Procedure, Evidence, Special Proceedings, Legal and Judicial Ethics.')">
-                    <h3>Remedial Law & Ethics</h3>
-                    <p>Procedures, Evidence, Special Actions, and Legal Ethics.</p>
-                </div>
-            </div>
-        </section>
+  <!-- HOMEPAGE HERO -->
+  <section class="hero" id="home">
+    <h1>Constitutional Law Quick-Recall Kit</h1>
+    <p>Comprehensive pre-week notes and interactive practice questions for rapid retention.</p>
+  </section>
 
-        <!-- Dynamic Subject View -->
-        <section id="subject-view" class="view">
-            <button class="action-btn" onclick="showView('home')" style="margin-bottom: 1rem;">&larr; Back to Home</button>
-            <h2 id="subject-title">Subject Title</h2>
-            <p id="subject-description" style="margin-top: 0.5rem; color: var(--text-muted);"></p>
-        </section>
+  <!-- MAIN CONTENT CONTAINER -->
+  <div class="container">
 
-        <!-- Jurisprudence / Cases View -->
-        <section id="jurisprudence-view" class="view">
-            <h2>Jurisprudence & Case Digests</h2>
-            <p style="color: var(--text-muted);">Browse landmark Supreme Court decisions and recent jurisprudence relevant to the 2027 Bar Syllabus.</p>
-            <div class="question-card" style="margin-top: 1rem;">
-                <h3>Search / Filter Cases</h3>
-                <p style="margin-top: 0.5rem;">Case library directory can be integrated here.</p>
-            </div>
-        </section>
+    <!-- REVIEW NOTES SECTION -->
+    <section class="card" id="notes">
+      <h2>1. Core Principles & Doctrines</h2>
+      
+      <h3>General Principles</h3>
+      <ul>
+        <li><strong>Supremacy & Scope:</strong> The Constitution is supreme. Unconstitutional acts are null and void. Standardly applies to state action, but extends to private conduct when: performing a public function, significantly entangled with government, or authorized by law.</li>
+        <li><strong>Rules of Construction:</strong> <em>Verba Legis</em> (plain meaning), <em>Ratio Legis Est Anima</em> (framers' intent), <em>Ut Magis Valeat Quam Pereat</em> (interpreted as a whole).</li>
+        <li><strong>Doctrine of Post-liminium:</strong> Suspended political laws automatically regain force upon liberation from an occupying power.</li>
+      </ul>
 
-        <!-- Quiz View -->
-        <section id="quiz-view" class="view">
-            <h2>Practice Recall Quiz</h2>
-            <p style="color: var(--text-muted);">Quick-fire questions to reinforce key legal concepts.</p>
+      <h3>Amendments vs. Revisions</h3>
+      <ul>
+        <li><strong>Amendment:</strong> Adds, changes, or deletes specific provisions without altering the basic constitutional structure. Initiated via Constituent Assembly (3/4 Congress vote), Constitutional Convention, or <strong>People's Initiative</strong>.</li>
+        <li><strong>Revision:</strong> Alters basic constitutional principles or structure. <em>Cannot be done via People's Initiative</em> (only via Constituent Assembly or Constitutional Convention).</li>
+      </ul>
 
-            <div class="question-card">
-                <p><strong>Question 1:</strong> Which constitutional right guarantees that no person shall be deprived of life, liberty, or property without due process of law?</p>
-                <div class="options-group">
-                    <button class="option-btn" onclick="openModal('Correct!', 'Article III, Section 1 of the 1987 Philippine Constitution states that no person shall be deprived of life, liberty, or property without due process of law, nor shall any person be denied the equal protection of the laws.')">A. Due Process Clause</button>
-                    <button class="option-btn" onclick="openModal('Incorrect', 'The correct answer is Due Process Clause under Article III, Section 1.')">B. Equal Protection Clause</button>
-                    <button class="option-btn" onclick="openModal('Incorrect', 'The correct answer is Due Process Clause under Article III, Section 1.')">C. Non-Impairment Clause</button>
-                </div>
-            </div>
-        </section>
+      <h3>Legislative & Executive Highlights</h3>
+      <ul>
+        <li><strong>Legislative Inquiries:</strong> Committee rules of procedure <em>must</em> be published in the Official Gazette or a newspaper of general circulation (website postings are invalid). Contempt detention ends when the Committee Report is approved/disapproved or the Congress term expires.</li>
+        <li><strong>Executive Privileges:</strong> Presidential immunity covers the sitting President during incumbency. Presidential Communications Privilege applies to non-delegable presidential powers and operational proximity advisors.</li>
+      </ul>
+    </section>
 
-        <!-- Exam Simulation View -->
-        <section id="exam-view" class="view">
-            <h2>Bar Exam Simulation</h2>
-            <p style="color: var(--text-muted);">Simulated past bar exam questions with legal basis explanations.</p>
-
-            <div class="question-card">
-                <p><strong>Bar Exam Scenario:</strong> A law is passed imposing an immediate tax without providing the taxpayer an opportunity to be heard. Is the law valid?</p>
-                <div class="options-group">
-                    <button class="option-btn" onclick="openModal('Incorrect', 'Taxation is broad, but it remains subject to constitutional limitations such as due process.')">A. Yes, because taxation is an inherent power of the State.</button>
-                    <button class="option-btn" onclick="openModal('Correct Basis!', 'While taxation is an essential inherent power, its exercise is strictly subject to constitutional limitations, including the Due Process Clause.')">B. No, because the power of taxation is subject to constitutional limitations.</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Info Modal for Explanations -->
-    <div id="info-modal" class="modal-overlay">
-        <div class="modal">
-            <h3 id="modal-title">Explanation</h3>
-            <p id="modal-text">Explanation details will appear here.</p>
-            <button class="action-btn" onclick="closeModal()">Close</button>
+    <!-- PRACTICE QUIZ SECTION -->
+    <section class="card" id="quiz">
+      <h2>2. Interactive Practice Quiz</h2>
+      
+      <!-- Question 1 -->
+      <div class="question-block" id="q1">
+        <div class="question-title">1. The Metropolitan Manila Development Authority (MMDA) required a private landowner to clear a 10-meter strip along a river bank for flood control. Does the MMDA have the authority to expropriate this strip?</div>
+        <div class="options">
+          <button class="option-btn" onclick="checkMCQ('q1', 0, false)">A) Yes, under its statutory duty to manage flood control.</button>
+          <button class="option-btn" onclick="checkMCQ('q1', 1, false)">B) Yes, because it is an exercise of police power for public safety.</button>
+          <button class="option-btn" onclick="checkMCQ('q1', 2, true)">C) No, because MMDA is neither an LGU nor a public corporation endowed with legislative power/eminent domain.</button>
+          <button class="option-btn" onclick="checkMCQ('q1', 3, false)">D) No, because easements do not constitute "taking" under Eminent Domain.</button>
         </div>
-    </div>
+        <div class="explanation" id="q1-exp"></div>
+      </div>
 
-    <footer>
-        <p>2027 Bar Examination Study Portal &copy; Designed for Bar Reviewees</p>
-    </footer>
+      <!-- Question 2 -->
+      <div class="question-block" id="q2">
+        <div class="question-title">2. [True or False] The Senate may enforce its inherent contempt power by detaining an uncooperative witness indefinitely until the witness answers the inquiry's questions.</div>
+        <div class="options">
+          <button class="option-btn" onclick="checkMCQ('q2', 0, false)">True</button>
+          <button class="option-btn" onclick="checkMCQ('q2', 1, true)">False</button>
+        </div>
+        <div class="explanation" id="q2-exp"></div>
+      </div>
 
-    <script>
-        // Tab / View Navigation
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(view => {
-                view.classList.remove('active');
-            });
-            
-            const targetView = document.getElementById(`${viewId}-view`);
-            if (targetView) {
-                targetView.classList.add('active');
-            }
+      <!-- Question 3 -->
+      <div class="question-block" id="q3">
+        <div class="question-title">3. Which of the following modes can be validly utilized to effect a REVISION of the Constitution?</div>
+        <div class="options">
+          <button class="option-btn" onclick="checkMCQ('q3', 0, false)">A) People's Initiative upon petition of 12% total registered voters.</button>
+          <button class="option-btn" onclick="checkMCQ('q3', 1, true)">B) Constituent Assembly upon a 3/4 vote of all members of Congress.</button>
+          <button class="option-btn" onclick="checkMCQ('q3', 2, false)">C) Constitutional Convention called by a simple majority vote of Congress.</button>
+          <button class="option-btn" onclick="checkMCQ('q3', 3, false)">D) Executive Order issued by the President under emergency powers.</button>
+        </div>
+        <div class="explanation" id="q3-exp"></div>
+      </div>
 
-            // Update Header Nav active state
-            document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-        }
+      <!-- Question 4 -->
+      <div class="question-block" id="q4">
+        <div class="question-title">4. [Fill-in-the-Blank] For a candidate to establish a change in domicile for election purposes, there must be physical presence coupled with both <em>animus _______</em> (intent to remain) and <em>animus _______</em> (intent to abandon).</div>
+        <input type="text" id="q4-input1" class="input-fill" placeholder="e.g., manendi / non-revertendi">
+        <br>
+        <button class="submit-btn" onclick="checkFillIn()">Submit Answer</button>
+        <div class="explanation" id="q4-exp"></div>
+      </div>
 
-        // Dynamically load Subject Content
-        function showSubject(name, description) {
-            document.getElementById('subject-title').innerText = name;
-            document.getElementById('subject-description').innerText = description;
-            showView('subject');
-        }
+    </section>
 
-        // Modal Functions
-        function openModal(status, explanation) {
-            document.getElementById('modal-title').innerText = status;
-            document.getElementById('modal-text').innerText = explanation;
-            document.getElementById('info-modal').classList.add('active');
-        }
+  </div>
 
-        function closeModal() {
-            document.getElementById('info-modal').classList.remove('active');
-        }
+  <footer>
+    <p>&copy; 2026 Legal Prep HQ. Built for constitutional law quick-recall preparation.</p>
+  </footer>
 
-        // Close modal when clicking outside content area
-        window.onclick = function(event) {
-            const modal = document.getElementById('info-modal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
-    </script>
+  <script>
+    /* INTERACTIVE QUIZ LOGIC */
+    const explanations = {
+      q1: "<strong>Correct!</strong> (C) MMDA's mandate is purely regulatory and administrative; it possesses no legislative grant or inherent power of eminent domain (<em>MMDA v. Diamond Motor Corp.</em>).",
+      q1_wrong: "<strong>Incorrect.</strong> The correct answer is (C). MMDA has no power of eminent domain.",
+      
+      q2: "<strong>Correct!</strong> Detention under legislative contempt ends upon the approval/disapproval of the Committee Report or the expiration of that Congress (<em>Balag v. Senate</em>).",
+      q2_wrong: "<strong>Incorrect.</strong> Detention cannot be indefinite; it terminates when the committee report is approved/disapproved or when Congress adjourn sine die.",
+      
+      q3: "<strong>Correct!</strong> (B) Section 1, Article XVII states revisions can only be made via Constituent Assembly (3/4 vote) or Constitutional Convention. People's Initiative is strictly limited to amendments.",
+      q3_wrong: "<strong>Incorrect.</strong> The correct answer is (B). People's Initiative cannot be used for Revisions.",
+      
+      q4: "<strong>Correct!</strong> Domicile requires physical presence + intent to stay (<em>animus manendi</em>) + intent not to return to the old home (<em>animus non-revertendi</em>).",
+      q4_wrong: "<strong>Incorrect.</strong> The required terms are <strong>manendi</strong> and <strong>non-revertendi</strong>."
+    };
+
+    function checkMCQ(questionId, optionIndex, isCorrect) {
+      const expEl = document.getElementById(`${questionId}-exp`);
+      if (isCorrect) {
+        expEl.className = "explanation correct";
+        expEl.innerHTML = explanations[questionId];
+      } else {
+        expEl.className = "explanation incorrect";
+        expEl.innerHTML = explanations[`${questionId}_wrong`];
+      }
+    }
+
+    function checkFillIn() {
+      const input = document.getElementById('q4-input1').value.toLowerCase().trim();
+      const expEl = document.getElementById('q4-exp');
+      
+      if (input.includes("manendi") && input.includes("non-revertendi")) {
+        expEl.className = "explanation correct";
+        expEl.innerHTML = explanations.q4;
+      } else {
+        expEl.className = "explanation incorrect";
+        expEl.innerHTML = explanations.q4_wrong;
+      }
+    }
+  </script>
+
 </body>
 </html>
